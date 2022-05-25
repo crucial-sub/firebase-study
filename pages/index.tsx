@@ -1,10 +1,15 @@
+import { Container } from "@mui/material";
 import type { NextPage } from "next";
-import Head from "next/head";
-import Image from "next/image";
-import styles from "../styles/Home.module.css";
+import TodoList from "../components/TodoList";
 
 const Home: NextPage = () => {
-  return <div>hello</div>;
+  return (
+    <div>
+      <Container>
+        <TodoList />
+      </Container>
+    </div>
+  );
 };
 
 export default Home;
