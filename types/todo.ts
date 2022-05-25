@@ -1,6 +1,6 @@
 export interface TodoType {
-  id: string;
+  id?: string;
   title?: string;
-  timestamp: number;
+  timestamp?: number;
   detail?: string;
 }
