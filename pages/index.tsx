@@ -5,7 +5,7 @@ import TodoList from "../components/TodoList";
 const Home: NextPage = () => {
   return (
     <div>
-      <Container>
+      <Container maxWidth="sm">
         <TodoList />
       </Container>
     </div>

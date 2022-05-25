@@ -8,18 +8,13 @@ import {
 } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import { db } from "../firebase";
+import { TodoType } from "../types/todo";
+import Todo from "./Todo";
 
 type Props = {};
 
-interface Todos {
-  id: string;
-  title?: string;
-  timestamp: number;
-  detail?: string;
-}
-
 const TodoList = (props: Props) => {
-  const [todos, setTodos] = useState<Todos[]>([]);
+  const [todos, setTodos] = useState<TodoType[]>([]);
 
   useEffect(() => {
     const collectionRef = collection(db, "todos");
@@ -46,7 +41,13 @@ const TodoList = (props: Props) => {
   return (
     <div>
       {todos.map((todo) => (
-        <div key={todo.id}>{todo.title}</div>
+        <Todo
+          key={todo.id}
+          title={todo.title}
+          detail={todo.detail}
+          id={todo.id}
+          timestamp={todo.timestamp}
+        />
       ))}
     </div>
   );
