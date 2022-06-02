@@ -1,11 +1,13 @@
 import { Button, TextField } from "@mui/material";
 import { addDoc, collection, serverTimestamp } from "firebase/firestore";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { db } from "../firebase";
+import { TodoContext } from "../pages/TodoContext";
 import { TodoType } from "../types/todo";
 
 const TodoForm = () => {
   const [todo, setTodo] = useState<TodoType>({ title: "", detail: "" });
+  const { showAlert }: any = useContext(TodoContext);
   const onSubmit = async () => {
     const collectionRef = collection(db, "todos");
     const docRef = await addDoc(collectionRef, {
@@ -14,7 +16,7 @@ const TodoForm = () => {
     });
     console.log("newTodo: ", todo, collectionRef, docRef);
     setTodo({ title: "", detail: "" });
-    alert(`Todo with id ${docRef.id} is added successfully`);
+    showAlert("success", `Todo with id ${docRef.id} is added successfully`);
   };
   return (
     <div>

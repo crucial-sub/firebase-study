@@ -5,11 +5,17 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import { deleteDoc, doc } from "firebase/firestore";
 import { db } from "../firebase";
+import { MouseEvent, useContext } from "react";
+import { TodoContext } from "../pages/TodoContext";
 
 const Todo = ({ id, timestamp, title, detail }: TodoType) => {
-  const deleteTodo = async (id, e) => {
+  const { showAlert }: any = useContext(TodoContext);
+  const deleteTodo = async (
+    id: string | undefined,
+    e: MouseEvent<HTMLButtonElement, MouseEvent>
+  ) => {
     e.stopPropagation();
-    const docRef = doc(db, "todo", id);
+    const docRef = doc(db, "todos", id);
     await deleteDoc(docRef);
     showAlert("error", `Todo with id ${id} deleted successfully`);
   };
@@ -19,7 +25,7 @@ const Todo = ({ id, timestamp, title, detail }: TodoType) => {
       style={{ backgroundColor: "#FAFAFA" }}
       secondaryAction={
         <>
-          <IconButton>
+          <IconButton onClick={(e) => deleteTodo(id, e)}>
             <DeleteIcon />
           </IconButton>
           <IconButton>
