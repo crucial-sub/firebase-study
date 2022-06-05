@@ -21,6 +21,7 @@ const Todo = ({ id, timestamp, title, detail }: TodoType) => {
   };
   return (
     <ListItem
+      onClick={() => setTodo({ id, title, detail })}
       sx={{ mt: 3, boxShadow: 3 }}
       style={{ backgroundColor: "#FAFAFA" }}
       secondaryAction={
